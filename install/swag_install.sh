@@ -77,6 +77,6 @@ alias die='EXIT=$? LINE=$LINENO error_exit'
 set -e
 
 msg_info "Updating Container OS"
-$STD apk update
-$STD apk upgrade
+apk update
+apk upgrade
 msg_ok "Updated Container OS"
