@@ -289,39 +289,6 @@ function advanced_settings() {
       echo -e "${DGN}Using Vlan: ${BGN}$VLAN1${CL}"
     fi
   fi
-  TZ1=$(whiptail --inputbox "Set a Time Zone(leave blank for Europe/Paris)" 8 58 --title "Time Zone" --cancel-button Exit-Script 3>&1 1>&2 2>&3)
-  exitstatus=$?
-  if [ $exitstatus = 0 ]; then
-    if [ -z $TZ1 ]; then
-      TZ1="Default" TZ="Europe/Paris"
-      echo -e "${DGN}Time Zone: ${BGN}$TZ1${CL}"
-    else
-      TZ=",hwaddr=$TZ1"
-      echo -e "${DGN}Time Zone: ${BGN}$TZ1${CL}"
-    fi
-  fi
-  URL1=$(whiptail --inputbox "Set URL domain (ex: domain.com)" 8 58 --title "Url domain" --cancel-button Exit-Script 3>&1 1>&2 2>&3)
-  exitstatus=$?
-  if [ $exitstatus = 0 ]; then
-    if [ -z $URL1 ]; then
-      URL1="Default" URL=""
-      echo -e "${DGN}Url: ${BGN}$URL1${CL}"
-    else
-      URL=",hwaddr=$URL1"
-      echo -e "${DGN}Url: ${BGN}$URL1${CL}"
-    fi
-  fi
-  VALIDATION1=$(whiptail --inputbox "Set validation(leave blank for dns)" 8 58 --title "Time Zone" --cancel-button Exit-Script 3>&1 1>&2 2>&3)
-  exitstatus=$?
-  if [ $exitstatus = 0 ]; then
-    if [ -z $VALIDATION1 ]; then
-      VALIDATION1="Default" VALIDATION="dns"
-      echo -e "${DGN}Url: ${BGN}$VALIDATION1${CL}"
-    else
-      VALIDATION=",hwaddr=$VALIDATION1"
-      echo -e "${DGN}Url: ${BGN}$VALIDATION1${CL}"
-    fi
-  fi
   if (whiptail --defaultno --title "SSH ACCESS" --yesno "Enable Root SSH Access?" 10 58); then
       echo -e "${DGN}Enable Root SSH Access: ${BGN}Yes${CL}"
       SSH="yes"
