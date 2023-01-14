@@ -113,11 +113,10 @@ $STD mv -u /DC/docker-swag-master/root/etc/services.d/ /etc
 
 msg_info "**** remove unnecessary fail2ban filters ****"
 $STD rm /etc/fail2ban/jail.d/defaults-debian.conf
-$STD rm -r /defaults/fail2ban/
-$STD mkdir /defaults/fail2ban/
+$STD rm -r /defaults/fail2ban/filter.d
 msg_info "**** copy fail2ban default action and filter to /defaults ****"
-#$STD mv /etc/fail2ban/action.d /defaults/fail2ban/
-#$STD mv /etc/fail2ban/filter.d /defaults/fail2ban/
+$STD mv /etc/fail2ban/action.d /defaults/fail2ban/
+$STD mv /etc/fail2ban/filter.d /defaults/fail2ban/
 
 echo "**** copy proxy confs to /defaults ****"
 $STD mkdir -p /defaults/nginx/proxy-confs
