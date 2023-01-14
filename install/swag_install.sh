@@ -119,3 +119,8 @@ msg_info "**** copy fail2ban default action and filter to /defaults ****"
 $STD mv /etc/fail2ban/action.d /defaults/fail2ban/
 $STD mv /etc/fail2ban/filter.d /defaults/fail2ban/
 
+echo "**** copy proxy confs to /defaults ****"
+$STD mkdir -p /defaults/nginx/proxy-confs
+$STD curl -o /tmp/proxy-confs.tar.gz -L "https://github.com/linuxserver/reverse-proxy-confs/tarball/master"
+$STD tar xf /tmp/proxy-confs.tar.gz -C /defaults/nginx/proxy-confs --strip-components=1 --exclude=linux*/.editorconfig --exclude=linux*/.gitattributes --exclude=linux*/.github --exclude=linux*/.gitignore --exclude=linux*/LICENSE
+
