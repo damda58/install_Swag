@@ -138,4 +138,59 @@ URL1=$(whiptail --inputbox "Set a domain name( ex: example.com)" 8 58 --title "D
       echo -e "${DGN}Using domain name: ${BGN}$URL1${CL}"
     fi
   fi
-  echo $URL
+SUBDOMAINS1=$(whiptail --inputbox "Subdomain( ex: wildcard)" 8 58 --title "SUBDOMAIN" --cancel-button Exit-Script 3>&1 1>&2 2>&3)
+  exitstatus=$?
+  if [ $exitstatus = 0 ]; then
+    if [ -z $SUBDOMAINS1 ]; then
+      SUBDOMAINS1="Default" SUBDOMAINS=""
+      echo -e "${DGN}Using Subdomain: ${BGN}$SUBDOMAINS1${CL}"
+    else
+      SUBDOMAINS=",hwaddr=$SUBDOMAINS1"
+      echo -e "${DGN}Using Subdomain: ${BGN}$SUBDOMAINS1${CL}"
+    fi
+  fi
+ONLY_SUBDOMAINS1=$(whiptail --inputbox "Set only subdomain(true/false)" 8 58 --title "ONLY SUBDOMAIN" --cancel-button Exit-Script 3>&1 1>&2 2>&3)
+  exitstatus=$?
+  if [ $exitstatus = 0 ]; then
+    if [ -z $ONLY_SUBDOMAINS1 ]; then
+      ONLY_SUBDOMAINS1="Default" ONLY_SUBDOMAINS=""
+      echo -e "${DGN}Using only subdomain: ${BGN}$ONLY_SUBDOMAINS1${CL}"
+    else
+      ONLY_SUBDOMAINS=",hwaddr=$ONLY_SUBDOMAINS1"
+      echo -e "${DGN}Using only subdomain: ${BGN}$ONLY_SUBDOMAINS1${CL}"
+    fi
+  fi
+VALIDATION1=$(whiptail --inputbox "Set a validation type( ex: dns)" 8 58 --title "VALIDATION" --cancel-button Exit-Script 3>&1 1>&2 2>&3)
+  exitstatus=$?
+  if [ $exitstatus = 0 ]; then
+    if [ -z $VALIDATION1 ]; then
+      VALIDATION1="Default" VALIDATION=""
+      echo -e "${DGN}Using validation: ${BGN}$VALIDATION1${CL}"
+    else
+      VALIDATION=",hwaddr=$VALIDATION1"
+      echo -e "${DGN}Using validation: ${BGN}$VALIDATION1${CL}"
+    fi
+  fi
+DNSPLUGIN1=$(whiptail --inputbox "Set a dns plugin( ex: ovh)" 8 58 --title "DNSPLUGIN" --cancel-button Exit-Script 3>&1 1>&2 2>&3)
+  exitstatus=$?
+  if [ $exitstatus = 0 ]; then
+    if [ -z $DNSPLUGIN1 ]; then
+      DNSPLUGIN1="Default" DNSPLUGIN=""
+      echo -e "${DGN}Using dns plugin: ${BGN}$DNSPLUGIN1${CL}"
+    else
+      DNSPLUGIN=",hwaddr=$DNSPLUGIN1"
+      echo -e "${DGN}Using dns plugin: ${BGN}$DNSPLUGIN1${CL}"
+    fi
+  fi
+EMAIL1=$(whiptail --inputbox "Set a email" 8 58 --title "Email" --cancel-button Exit-Script 3>&1 1>&2 2>&3)
+  exitstatus=$?
+  if [ $exitstatus = 0 ]; then
+    if [ -z $EMAIL1 ]; then
+      EMAIL1="Default" EMAIL=""
+      echo -e "${DGN}Using dns plugin: ${BGN}$EMAIL1${CL}"
+    else
+      EMAIL=",hwaddr=$EMAIL1"
+      echo -e "${DGN}Using dns plugin: ${BGN}$EMAIL1${CL}"
+    fi
+  fi
+  export AWS_CONFIG_FILE=/config/dns-conf/route53.ini
