@@ -78,7 +78,7 @@ set -e
 
 msg_info "Updating Container OS"
 $STD apt update
-$STD apt upgrade
+#$STD apt upgrade
 msg_ok "Updated Container OS"
 export DHLEVEL=2048
 export ONLY_SUBDOMAINS=false
