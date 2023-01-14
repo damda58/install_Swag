@@ -96,4 +96,38 @@ msg_info "**** install python modules ****"
 $STD apt install -y python3-cryptography python3-future python3-pip whois
 msg_info "**** install certbot and plugin****"
 $STD pip install certbot certbot-dns-acmedns certbot-dns-aliyun certbot-dns-azure certbot-dns-cloudflare certbot-dns-cpanel certbot-dns-desec certbot-dns-digitalocean certbot-dns-directadmin certbot-dns-dnsimple certbot-dns-dnsmadeeasy certbot-dns-dnspod certbot-dns-do certbot-dns-domeneshop certbot-dns-duckdns certbot-dns-dynu certbot-dns-gehirn certbot-dns-godaddy certbot-dns-google certbot-dns-he certbot-dns-hetzner certbot-dns-infomaniak certbot-dns-inwx certbot-dns-ionos certbot-dns-linode certbot-dns-loopia certbot-dns-luadns certbot-dns-netcup certbot-dns-njalla certbot-dns-nsone certbot-dns-ovh certbot-dns-porkbun certbot-dns-rfc2136 certbot-dns-route53 certbot-dns-sakuracloud certbot-dns-standalone certbot-dns-transip certbot-dns-vultr certbot-plugin-gandi cryptography requests
+msg_info "**** Download defaults files****"
+mkdir /DC
+mkdir /defaults
+cd /DC 
+wget https://github.com/linuxserver/docker-swag/archive/refs/heads/master.zip
+apt install -y unzip
+unzip master.zip
+rm master.zip
+mv /DC/docker-swag-master/root/defaults /
+mv /DC/docker-swag-master/root/app /
+mv /DC/docker-swag-master/root/app /
+mv -u /DC/docker-swag-master/root/etc/logrotate.d/fail2ban /etc/logrotate.d/
+mv -u /DC/docker-swag-master/root/etc/logrotate.d/lerotate /etc/logrotate.d/
+mv -u /DC/docker-swag-master/root/etc/crontabs/root /etc/crontabs
+mv -u /DC/docker-swag-master/root/etc/services.d/ /etc
+
+msg_info "**** enable OCSP stapling from base ****" && \
+  sed -i \
+    's|#ssl_stapling on;|ssl_stapling on;|' \
+    /defaults/nginx/ssl.conf.sample && \
+  sed -i \
+    's|#ssl_stapling_verify on;|ssl_stapling_verify on;|' \
+    /defaults/nginx/ssl.conf.sample && \
+  sed -i \
+    's|#ssl_trusted_certificate /config/keys/cert.crt;|ssl_trusted_certificate /config/keys/cert.crt;|' \
+    /defaults/nginx/ssl.conf.sample
+
+msg_info "**** remove unnecessary fail2ban filters ****"
+rm /etc/fail2ban/jail.d/defaults-debian.conf
+rm -r /defaults/fail2ban/
+mkdir /defaults/fail2ban/
+msg_info "**** copy fail2ban default action and filter to /defaults ****"
+mv /etc/fail2ban/action.d /defaults/fail2ban/
+mv /etc/fail2ban/filter.d /defaults/fail2ban/
 
