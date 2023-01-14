@@ -123,3 +123,15 @@ $STD mkdir -p /defaults/nginx/proxy-confs
 $STD curl -o /tmp/proxy-confs.tar.gz -L "https://github.com/linuxserver/reverse-proxy-confs/tarball/master"
 $STD tar xf /tmp/proxy-confs.tar.gz -C /defaults/nginx/proxy-confs --strip-components=1 --exclude=linux*/.editorconfig --exclude=linux*/.gitattributes --exclude=linux*/.github --exclude=linux*/.gitignore --exclude=linux*/LICENSE
 
+URL1=$(whiptail --inputbox "Set a domain name( ex: example.com)" 8 58 --title "DOMAIN NAME" --cancel-button Exit-Script 3>&1 1>&2 2>&3)
+  exitstatus=$?
+  if [ $exitstatus = 0 ]; then
+    if [ -z $URL1 ]; then
+      URL1="Default" URL=""
+      echo -e "${DGN}Using domain name: ${BGN}$URL1${CL}"
+    else
+      URL=",hwaddr=$URL1"
+      echo -e "${DGN}Using domain name: ${BGN}$URL1${CL}"
+    fi
+  fi
+  echo $URL
