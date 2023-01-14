@@ -87,9 +87,9 @@ export S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 export CERTBOT_VERSION=2.2.0
 
 msg_info "**** install build packages ****"
-apt install -Y cargo g++ gcc libffi-dev libxml2-dev libxslt-dev openssl python3-dev
+apt install -y cargo g++ gcc libffi-dev libxml2-dev libxslt-dev openssl python3-dev
 msg_info "**** install runtime packages ****"
-apt -Y install curl fail2ban gnupg memcached nginx libnginx-mod-http-dav-ext libnginx-mod-http-echo libnginx-mod-http-fancyindex libnginx-mod-http-geoip2 libnginx-mod-http-image-filter libnginx-mod-http-perl libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-rtmp libnginx-mod-stream libnginx-mod-stream-geoip2 libnginx-mod-http-uploadprogress libnginx-mod-http-headers-more-filter
+apt install -y curl fail2ban gnupg memcached nginx libnginx-mod-http-dav-ext libnginx-mod-http-echo libnginx-mod-http-fancyindex libnginx-mod-http-geoip2 libnginx-mod-http-image-filter libnginx-mod-http-perl libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-rtmp libnginx-mod-stream libnginx-mod-stream-geoip2 libnginx-mod-http-uploadprogress libnginx-mod-http-headers-more-filter
 msg_info "**** install vim mod for nginx ****"
 mkdir -p ~/.vim/syntax/
 cd ~/.vim/syntax/
@@ -99,5 +99,5 @@ cat > ~/.vim/filetype.vim <<EOF
 au BufRead,BufNewFile /etc/nginx/*,/usr/local/nginx/conf/* if &ft == '' | setfiletype nginx | endif
 EOF
 msg_info "**** install phpo extensions ****"
-apt install -Y php-bcmath php-bz2 php-ctype php-curl php-dom php-exif php-ftp php-gd php-gmp php-iconv php-imap php-intl php-ldap php-mysqli php-mysqlnd php-opcache php-pear php-apcu-bc dh-php php-pgsql php-phar php-posix php-soap php-sockets php-sqlite3 php-tokenizer php-xml php-xmlreader php-xsl php-zip
+apt install -y php-bcmath php-bz2 php-ctype php-curl php-dom php-exif php-ftp php-gd php-gmp php-iconv php-imap php-intl php-ldap php-mysqli php-mysqlnd php-opcache php-pear php-apcu-bc dh-php php-pgsql php-phar php-posix php-soap php-sockets php-sqlite3 php-tokenizer php-xml php-xmlreader php-xsl php-zip
 
