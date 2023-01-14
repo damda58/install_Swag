@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 if [ "$VERBOSE" == "yes" ]; then set -x; fi
+BGN=$(echo "\033[4;92m"))
+DGN=$(echo "\033[32m")
+BFR="\\r\\033[K"
 YW=$(echo "\033[33m")
 RD=$(echo "\033[01;31m")
 BL=$(echo "\033[36m")
