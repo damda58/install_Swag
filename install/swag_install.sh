@@ -90,14 +90,10 @@ msg_info "**** install build packages ****"
 apt install -y cargo g++ gcc libffi-dev libxml2-dev libxslt-dev openssl python3-dev
 msg_info "**** install runtime packages ****"
 apt install -y curl fail2ban gnupg memcached nginx libnginx-mod-http-dav-ext libnginx-mod-http-echo libnginx-mod-http-fancyindex libnginx-mod-http-geoip2 libnginx-mod-http-image-filter libnginx-mod-http-perl libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-rtmp libnginx-mod-stream libnginx-mod-stream-geoip2 libnginx-mod-http-uploadprogress libnginx-mod-http-headers-more-filter
-msg_info "**** install vim mod for nginx ****"
-mkdir -p ~/.vim/syntax/
-cd ~/.vim/syntax/
-wget http://www.vim.org/scripts/download_script.php?src_id=19394
-mv download_script.php\?src_id\=19394 nginx.vim
-cat > ~/.vim/filetype.vim <<EOF
-au BufRead,BufNewFile /etc/nginx/*,/usr/local/nginx/conf/* if &ft == '' | setfiletype nginx | endif
-EOF
-msg_info "**** install phpo extensions ****"
-apt install -y php-bcmath php-bz2 php-ctype php-curl php-dom php-exif php-ftp php-gd php-gmp php-iconv php-imap php-intl php-ldap php-mysqli php-mysqlnd php-opcache php-pear php-apcu-bc dh-php php-pgsql php-phar php-posix php-soap php-sockets php-sqlite3 php-tokenizer php-xml php-xmlreader php-xsl php-zip
+msg_info "**** install php extensions ****"
+$STD apt install -y php-bcmath php-bz2 php-ctype php-curl php-dom php-exif php-ftp php-gd php-gmp php-iconv php-imap php-intl php-ldap php-mysqli php-mysqlnd php-opcache php-pear php-apcu-bc dh-php php-pgsql php-phar php-posix php-soap php-sockets php-sqlite3 php-tokenizer php-xml php-xmlreader php-xsl php-zip php-xmlrpc
+msg_info "**** install python modules ****"
+$STD apt install -y python3-cryptography python3-future python3-pip whois
+msg_info "**** install certbot and plugin****"
+$STD pip install certbot certbot-dns-acmedns certbot-dns-aliyun certbot-dns-azure certbot-dns-cloudflare certbot-dns-cpanel certbot-dns-desec certbot-dns-digitalocean certbot-dns-directadmin certbot-dns-dnsimple certbot-dns-dnsmadeeasy certbot-dns-dnspod certbot-dns-do certbot-dns-domeneshop certbot-dns-duckdns certbot-dns-dynu certbot-dns-gehirn certbot-dns-godaddy certbot-dns-google certbot-dns-he certbot-dns-hetzner certbot-dns-infomaniak certbot-dns-inwx certbot-dns-ionos certbot-dns-linode certbot-dns-loopia certbot-dns-luadns certbot-dns-netcup certbot-dns-njalla certbot-dns-nsone certbot-dns-ovh certbot-dns-porkbun certbot-dns-rfc2136 certbot-dns-route53 certbot-dns-sakuracloud certbot-dns-standalone certbot-dns-transip certbot-dns-vultr certbot-plugin-gandi cryptography requests
 
