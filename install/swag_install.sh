@@ -194,3 +194,59 @@ EMAIL1=$(whiptail --inputbox "Set a email" 8 58 --title "Email" --cancel-button 
     fi
   fi
   export AWS_CONFIG_FILE=/config/dns-conf/route53.ini
+
+#31############################################################################################
+if [[ -z "${URL}" ]]; then
+    echo "Please pass your URL as an environment variable in your docker run command. See docker info for more details."
+    sleep infinity
+fi
+#/31############################################################################################
+#40############################################################################################
+# make our folders and links
+mkdir -p \
+    /config/{fail2ban,crontabs,dns-conf} \
+    /config/etc/letsencrypt/renewal-hooks \
+    /config/log/{fail2ban,letsencrypt,nginx} \
+    /config/nginx/proxy-confs \
+    /run/fail2ban
+rm -rf /etc/letsencrypt
+ln -s /config/etc/letsencrypt /etc/letsencrypt
+#/40############################################################################################
+#42############################################################################################
+# copy/update the fail2ban config defaults to/in /config
+cp -R /defaults/fail2ban/filter.d /config/fail2ban/
+cp -R /defaults/fail2ban/action.d /config/fail2ban/
+# if jail.local is missing in /config, copy default
+if [[ ! -f /config/fail2ban/jail.local ]]; then
+    cp /defaults/fail2ban/jail.local /config/fail2ban/jail.local
+fi
+# Replace fail2ban config with user config
+if [[ -d /etc/fail2ban/filter.d ]]; then
+    rm -rf /etc/fail2ban/filter.d
+fi
+if [[ -d /etc/fail2ban/action.d ]]; then
+    rm -rf /etc/fail2ban/action.d
+fi
+cp -R /config/fail2ban/filter.d /etc/fail2ban/
+cp -R /config/fail2ban/action.d /etc/fail2ban/
+cp /defaults/fail2ban/fail2ban.local /etc/fail2ban/
+cp /config/fail2ban/jail.local /etc/fail2ban/jail.local
+
+# logfiles needed by fail2ban
+if [[ ! -f /config/log/nginx/error.log ]]; then
+    touch /config/log/nginx/error.log
+fi
+if [[ ! -f /config/log/nginx/access.log ]]; then
+    touch /config/log/nginx/access.log
+fi
+#/42############################################################################################
+#43############################################################################################
+# copy crontabs if needed
+if [[ ! -f /config/crontabs/root ]]; then
+    cp /etc/crontabs/root /config/crontabs/
+fi
+
+# import user crontabs
+rm /etc/crontabs/*
+cp /config/crontabs/* /etc/crontabs/
+#/43############################################################################################
