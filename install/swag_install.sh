@@ -108,6 +108,7 @@ $STD mv /DC/docker-swag-master/root/defaults /
 $STD mv /DC/docker-swag-master/root/app /
 $STD mv -u /DC/docker-swag-master/root/etc/logrotate.d/fail2ban /etc/logrotate.d/
 $STD mv -u /DC/docker-swag-master/root/etc/logrotate.d/lerotate /etc/logrotate.d/
+$STD mkdir /etc/crontabs
 $STD mv -u /DC/docker-swag-master/root/etc/crontabs/root /etc/crontabs/root
 $STD mv -u /DC/docker-swag-master/root/etc/services.d/ /etc
 
