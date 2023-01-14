@@ -108,7 +108,7 @@ $STD mv /DC/docker-swag-master/root/defaults /
 $STD mv /DC/docker-swag-master/root/app /
 $STD mv -u /DC/docker-swag-master/root/etc/logrotate.d/fail2ban /etc/logrotate.d/
 $STD mv -u /DC/docker-swag-master/root/etc/logrotate.d/lerotate /etc/logrotate.d/
-$STD mv -u /DC/docker-swag-master/root/etc/crontabs/root /etc/crontabs
+$STD mv -u /DC/docker-swag-master/root/etc/crontabs/root /etc/crontabs/root
 $STD mv -u /DC/docker-swag-master/root/etc/services.d/ /etc
 
 msg_info "**** remove unnecessary fail2ban filters ****"
@@ -116,8 +116,8 @@ $STD rm /etc/fail2ban/jail.d/defaults-debian.conf
 $STD rm -r /defaults/fail2ban/
 $STD mkdir /defaults/fail2ban/
 msg_info "**** copy fail2ban default action and filter to /defaults ****"
-$STD mv /etc/fail2ban/action.d /defaults/fail2ban/
-$STD mv /etc/fail2ban/filter.d /defaults/fail2ban/
+#$STD mv /etc/fail2ban/action.d /defaults/fail2ban/
+#$STD mv /etc/fail2ban/filter.d /defaults/fail2ban/
 
 echo "**** copy proxy confs to /defaults ****"
 $STD mkdir -p /defaults/nginx/proxy-confs
